@@ -1,7 +1,7 @@
 package edu.iu.se.primeservice.services;
 
 import edu.iu.se.primeservice.model.Customer;
-
+import edu.iu.se.primeservice.repository.AuthenticationDBRepository;
 import edu.iu.se.primeservice.repository.IAuthenticationRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +16,10 @@ import java.io.IOException;
 public class AuthenticationService implements IAuthenticationService,UserDetailsService {
     IAuthenticationRepository authenticationRepository;
 
-    public AuthenticationService(IAuthenticationRepository authenticationRepository) {
-        this.authenticationRepository = authenticationRepository;
+    AuthenticationDBRepository authenticationDBRepository;
+
+    public AuthenticationService(AuthenticationDBRepository authenticationDBRepository) {
+        this.authenticationDBRepository = authenticationDBRepository;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class AuthenticationService implements IAuthenticationService,UserDetails
                 throw new UsernameNotFoundException("");
             }
             return User.withUsername(username).password(customer.getPassword()).build();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
