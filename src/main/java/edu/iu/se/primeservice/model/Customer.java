@@ -1,5 +1,11 @@
 package edu.iu.se.primeservice.model;
 
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+
+@Table
+@Entity
+
 public class Customer {
     private String username;
     private String password;
