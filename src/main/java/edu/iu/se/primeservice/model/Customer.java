@@ -2,11 +2,13 @@ package edu.iu.se.primeservice.model;
 
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Table
 @Entity
 
 public class Customer {
+    @Id
     private String username;
     private String password;
     public Customer(String username, String password) {
