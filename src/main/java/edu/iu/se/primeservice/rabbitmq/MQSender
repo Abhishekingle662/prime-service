@@ -1,0 +1,21 @@
+@Component
+public class MQSender{
+    private final Queue queue;
+    private final RabbitTemplate RabbitTemplate;
+
+    public MQSender(Queue, queue, RabbitTemplate rabbitTemplate){
+        this.queue = queue;
+        this.rabbitTemplate = rabbitTemplate;
+    }
+
+
+    public void sendMessage(String username, int n, boolean isPrime){
+        String message = 
+                MessageFormat
+                        .format(
+                            pattern: "customer: {0}, n: {1}, isPrime: {2}"
+                            , username, Sring.valueOf(n), isPrime);
+        message = "{" + message + "}";
+        rabbitTemplate.convertAndSend(routingkey: "primes", message);         
+    }
+}
